@@ -3,52 +3,52 @@ import { StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-nat
 import firebase from 'firebase';
 
 class LoginScreen extends React.Component {
-state = {
-  email: '',
-  password: '',
-}
+  state = {
+    email: 'user1@example.com',
+    password: 'hogehoge',
+  }
 
-// eslint-disable-next-line
-handleSubmit() {
-  firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-    .then((user) => {
-      console.log('Success Login!!!');
-      this.props.navigation.navigate('Home', { currentUser: user });
-    })
-    .catch((error) => {
-      console.log('error', error);
-    });
-}
+  // eslint-disable-next-line
+  handleSubmit() {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        console.log('Success Login!!!');
+        this.props.navigation.navigate('Home');
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  }
 
-render() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        ログイン
-      </Text>
-      <TextInput
-        style={styles.input}
-        value={this.state.email}
-        onChangeText={(text) => { this.setState({ email: text }); }}
-        autoCapitalize="none"
-        autoCorrect={false}
-        placeholder="Email Address"
-      />
-      <TextInput
-        style={styles.input}
-        value={this.state.password}
-        onChangeText={(text) => { this.setState({ password: text }); }}
-        autoCapitalize="none"
-        autoCorrect={false}
-        placeholder="Password"
-        secureTextEntry
-      />
-      <TouchableHighlight style={styles.button} onPress={this.handleSubmit.bind(this)} underlayColor="#c70f66">
-        <Text style={styles.buttonTitle}>ログインする</Text>
-      </TouchableHighlight>
-    </View>
-  );
-}
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          ログイン
+        </Text>
+        <TextInput
+          style={styles.input}
+          value={this.state.email}
+          onChangeText={(text) => { this.setState({ email: text }); }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Email Address"
+        />
+        <TextInput
+          style={styles.input}
+          value={this.state.password}
+          onChangeText={(text) => { this.setState({ password: text }); }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Password"
+          secureTextEntry
+        />
+        <TouchableHighlight style={styles.button} onPress={this.handleSubmit.bind(this)} underlayColor="#c70f66">
+          <Text style={styles.buttonTitle}>ログインする</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
