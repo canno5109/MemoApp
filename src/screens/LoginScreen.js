@@ -12,15 +12,12 @@ state = {
 handleSubmit() {
   firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     .then((user) => {
-      this.props.navigation.navigate('Home');
+      console.log('Success Login!!!');
+      this.props.navigation.navigate('Home', { currentUser: user });
     })
     .catch((error) => {
       console.log('error', error);
-    })
-
-  // this.props.navigation.navigate('Home
-
-  // Log in!
+    });
 }
 
 render() {
@@ -46,7 +43,7 @@ render() {
         placeholder="Password"
         secureTextEntry
       />
-      <TouchableHighlight style={styles.button} onPress={this.handleSubmit.bind(this)}>
+      <TouchableHighlight style={styles.button} onPress={this.handleSubmit.bind(this)} underlayColor="#c70f66">
         <Text style={styles.buttonTitle}>ログインする</Text>
       </TouchableHighlight>
     </View>
